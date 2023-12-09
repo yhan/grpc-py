@@ -1,13 +1,16 @@
 import logging
+import threading
 
 import grpc
 import route_guide_pb2
 import route_guide_pb2_grpc
 import route_guide_resources
+from route.ThreadDiag import *
 from route.route_guide_pb2_grpc import RouteGuideStub
 
 
 def guide_get_feature(stub: RouteGuideStub):
+    print(thread_info())
     point = route_guide_pb2.Point(latitude=409146138, longitude=-746188906)
     guide_get_one_feature(stub, point) # editor does not detect signature
 

@@ -4,6 +4,11 @@ python -m grpc_tools.protoc -I./protos --python_out=./route --pyi_out=./route --
 
 python.exe run_codegen.py
 
+## Requirements
+pip freeze > requirements.txt
+
+pip install -r requirements.txt
+
 ## AsyncIO
 
 in terms of I/O why should i use it ? 
