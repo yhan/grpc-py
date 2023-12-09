@@ -33,7 +33,7 @@ def run():
         response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"))
         print("Greeter client received: " + response.message)
 
-        response = stub.SayHelloAgain(helloworld_pb2.HelloRequest(name='Yi'))
+        response = stub.SayHelloAgain2(helloworld_pb2.HelloRequest(name='Yi'))
         print("Greeter client received: " + response.message)
 
 

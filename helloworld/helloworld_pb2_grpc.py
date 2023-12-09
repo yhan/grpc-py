@@ -30,8 +30,8 @@ class GreeterStub(object):
                 request_serializer=helloworld__pb2.HelloRequest.SerializeToString,
                 response_deserializer=helloworld__pb2.HelloReply.FromString,
                 )
-        self.SayHelloAgain = channel.unary_unary(
-                '/helloworld.Greeter/SayHelloAgain',
+        self.SayHelloAgain2 = channel.unary_unary(
+                '/helloworld.Greeter/SayHelloAgain2',
                 request_serializer=helloworld__pb2.HelloRequest.SerializeToString,
                 response_deserializer=helloworld__pb2.HelloReply.FromString,
                 )
@@ -60,7 +60,7 @@ class GreeterServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SayHelloAgain(self, request, context):
+    def SayHelloAgain2(self, request, context):
         """Sends another greeting
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -85,8 +85,8 @@ def add_GreeterServicer_to_server(servicer, server):
                     request_deserializer=helloworld__pb2.HelloRequest.FromString,
                     response_serializer=helloworld__pb2.HelloReply.SerializeToString,
             ),
-            'SayHelloAgain': grpc.unary_unary_rpc_method_handler(
-                    servicer.SayHelloAgain,
+            'SayHelloAgain2': grpc.unary_unary_rpc_method_handler(
+                    servicer.SayHelloAgain2,
                     request_deserializer=helloworld__pb2.HelloRequest.FromString,
                     response_serializer=helloworld__pb2.HelloReply.SerializeToString,
             ),
@@ -153,7 +153,7 @@ class Greeter(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SayHelloAgain(request,
+    def SayHelloAgain2(request,
             target,
             options=(),
             channel_credentials=None,
@@ -163,7 +163,7 @@ class Greeter(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/helloworld.Greeter/SayHelloAgain',
+        return grpc.experimental.unary_unary(request, target, '/helloworld.Greeter/SayHelloAgain2',
             helloworld__pb2.HelloRequest.SerializeToString,
             helloworld__pb2.HelloReply.FromString,
             options, channel_credentials,
