@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import sys
 from typing import AsyncIterable, Iterable
 
 import grpc
@@ -35,8 +36,10 @@ async def serve() -> None:
     route_guide_pb2_grpc.add_RouteGuideServicer_to_server(
         RouteGuideServicer(), server
     )
-    server.add_insecure_port("[::]:50051")
+    port = "50051"
+    server.add_insecure_port("[::]:" + port)
     await server.start()
+    print(f"listen on port: {port}")
     await server.wait_for_termination()
 
 async def my_coroutine():
@@ -46,4 +49,19 @@ async def my_coroutine():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
+
+    #https://bobbyhadz.com/blog/deprecationwarning-there-is-no-current-event-loop
+    # if sys.version_info < (3, 10):
+    #     loop = asyncio.get_event_loop()
+    # else:
+    #     try:
+    #         loop = asyncio.get_running_loop()
+    #     except RuntimeError:
+    #         loop = asyncio.new_event_loop()
+    #
+    #     asyncio.set_event_loop(loop)
+
+    # loop = asyncio.get_event_loop()
+    # loop.run_until_complete(serve())
+
     asyncio.run(serve())

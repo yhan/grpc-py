@@ -37,3 +37,22 @@ Simplicity in Code:
 
 AsyncIO can lead to more readable and concise code when dealing with asynchronous operations. The use of coroutines and the async/await syntax makes it easier to write and understand asynchronous code compared to callback-based approaches.
 In summary, if your application involves a lot of I/O-bound operations, such as making network requests, reading from files, or interacting with databases, AsyncIO can help you write more efficient and scalable code by taking advantage of asynchronous programming principles and cooperative multitasking.
+
+### event loop warn
+```
+C:\Users\hanyi\PycharmProjects\py_testrestore\venv\Scripts\python.exe --version
+Python 3.10.5
+```
+
+Has warning:  
+```
+C:\Users\hanyi\PycharmProjects\py_testrestore\route\asyncio_route_guide_server.py:63: DeprecationWarning: There is no current event loop
+  loop = asyncio.get_event_loop()
+```
+
+No warning:  
+```
+(base) → C:\repo\grpc\examples [master ≡ +694 ~0 -0 | +3 ~0 -0 !]› C:\ProgramData\Anaconda3\python.exe --version
+Python 3.9.12
+ 
+```

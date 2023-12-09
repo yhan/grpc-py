@@ -53,15 +53,4 @@ async def main() -> None:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-
-    # if sys.version_info < (3, 10):
-    #     loop = asyncio.get_event_loop()
-    # else:
-    #     try:
-    #         loop = asyncio.get_running_loop()
-    #     except RuntimeError:
-    #         loop = asyncio.new_event_loop()
-    #
-    #     asyncio.set_event_loop(loop)
-
     asyncio.run(main())
