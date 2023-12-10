@@ -16,10 +16,11 @@
 from __future__ import print_function
 
 import logging
+import os
 
 import grpc
 import helloworld_pb2
-from helloworld import helloworld_pb2_grpc
+import helloworld_pb2_grpc
 
 
 def run():
@@ -28,16 +29,23 @@ def run():
     # of the code.
     print("Will try to greet world ...")
     with grpc.insecure_channel("localhost:50051") as channel:
+        while True:
+            stub = helloworld_pb2_grpc.GreeterStub(channel)
+            response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"))
+            print("Greeter client received: " + response.message)
 
-        stub = helloworld_pb2_grpc.GreeterStub(channel)
-        response = stub.SayHello(helloworld_pb2.HelloRequest(name="you"))
-        print("Greeter client received: " + response.message)
-
-        response = stub.SayHelloAgain2(helloworld_pb2.HelloRequest(name='Yi'))
-        print("Greeter client received: " + response.message)
+            response = stub.SayHelloAgain2(helloworld_pb2.HelloRequest(name='Yi'))
+            print("Greeter client received: " + response.message)
 
 
 if __name__ == "__main__":
+    # os.environ['GRPC_VERBOSITY'] = 'DEBUG'
+    # os.environ['GRPC_TRACE'] = 'http_keepalive'
+
+    pid = os.getpid()
+    print("HelloWorld client Current Process ID:", pid)
+    input("Press Enter to continue...")
+
     logging.basicConfig()
     run()
     # print(sys.path)

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """The Python implementation of the GRPC helloworld.Greeter server."""
-
+import os
 from concurrent import futures
 import logging
 
@@ -43,6 +43,8 @@ def serve():
 
 
 if __name__ == "__main__":
+    # os.environ['GRPC_VERBOSITY'] = 'DEBUG'
+    # os.environ['GRPC_TRACE'] = 'http_keepalive'
     logging.basicConfig()
     serve()
     print(sys.path)
